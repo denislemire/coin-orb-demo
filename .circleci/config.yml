@@ -16,21 +16,7 @@ jobs:
       - run: echo “hello world”
       - run: mkdir -p workspace
       - coin-flip/coinflip
-  truthy-test:
-    executor: my-executor
-    resource_class: small
-    steps:
-      - run: /bin/true
-      - attach_workspace:
-          at: /tmp/workspace
-      - run: cat /tmp/workspace/coin.txt
-      - store_artifacts:
-          path: /tmp/workspace/coin.txt
-          destination: coin.txt
 workflows:
   build:
     jobs:
       - build
-      - truthy-test:
-          requires:
-            - build
